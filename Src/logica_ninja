@@ -1,0 +1,33 @@
+
+struct Ninja {
+    int id;                 
+    char nome[100];         // Nome com espaço
+    char rank[30];          
+    bool temKekkeiGenkai;   // Tipo boleano pra bater o requisito de tipos diferentes 
+    int idade;              
+    char especialidade[50]; 
+    bool removido;          // Pro esquema de "remoção lógica" que o prof pediu. 
+                            // A gente só marca como true e não apaga na hora.
+};
+
+// Função pra aumentar o tamanho do nosso vetor dinâmico quando lotar. 
+// O PDF manda começar com 40 e subir de 10 em 10.
+void redimensionar(Ninja* &v, int &tamanho) {
+    int novoTamanho = tamanho + 10; 
+    
+    // Aí tem q criar um vetor "reserva" maior na memória
+    Ninja* reserva = new Ninja[novoTamanho];
+
+    // Copiando todo mundo do vetor que encheu pro novo vetor maior
+    for (int i = 0; i < tamanho; i++) {
+        reserva[i] = v[i];
+    }
+
+    // Deletando o vetor antigo pra não dar memory leak
+    delete[] v;
+    
+    v = reserva;
+    tamanho = novoTamanho;
+}
+
+// TODO: Matheus/Alvaro, aqui a gente vai ter que implementar o método de ordenação que o professor pediu, e as funções de busca também.

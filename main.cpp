@@ -10,7 +10,6 @@
 using namespace std;
 
 int main() {
-
     cout << "INICIANDO O SISTEMA... TESTE DE EXECUCAO!" << endl; //mensagem de teste para confirmar que o programa iniciou sem problemas
     
     int tamanho = 40; 
@@ -121,14 +120,31 @@ int main() {
                 cout << "\n--- BUSCAR NINJA ---" << endl;
                 cout << "[1] Buscar por ID" << endl;
                 cout << "[2] Buscar Nome Exato" << endl;
-                cout << "[3] Buscar Sobrenome (Ex: 'Uchiha')" << endl;
+                cout << "[3] Buscar Nome Parcial (Ex: 'Uchiha')" << endl;
                 cout << "Escolha: ";
                 cin >> tipoBusca;
 
                 if (tipoBusca == 1) {
-                    // ... (seu código de busca por ID)
+                    int idBusca;
+                    cout << "Digite o ID: ";
+                    cin >> idBusca;
+                    int index = buscaBinariaPorId(ninjas, contador, idBusca);
+                    if(index != -1) {
+                        cout << "ENCONTRADO -> Nome: " << ninjas[index].nome << " | Especialidade: " << ninjas[index].especialidade << endl;
+                    } else {
+                        cout << "Nao encontrado! O vetor foi ordenado por ID antes da busca?" << endl;
+                    }
                 } else if (tipoBusca == 2) {
-                    // ... (seu código de busca por Nome Exato)
+                    char nomeBusca[100];
+                    cin.ignore();
+                    cout << "Digite o Nome exato: ";
+                    cin.getline(nomeBusca, 100);
+                    int index = buscaPorNome(ninjas, contador, nomeBusca);
+                    if(index != -1) {
+                        cout << "ENCONTRADO -> ID: " << ninjas[index].id << " | Idade: " << ninjas[index].idade << endl;
+                    } else {
+                        cout << "Ninja nao encontrado." << endl;
+                    }
                 } else if (tipoBusca == 3) {
                     char nomeBusca[100];
                     cin.ignore();
